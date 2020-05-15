@@ -157,6 +157,10 @@ time cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D WITH_QT=ON \
       -D WITH_OPENGL=ON \
       -D CUDA_NVCC_FLAGS="--expt-relaxed-constexpr" \
+      -D PYTHON_INCLUDE_DIR=$(python3 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
+      -D PYTHON_LIBRARY=$(python3 -c "from distutils.sysconfig import get_config_var;from os.path import dirname,join ; print(join(dirname(get_config_var('LIBPC')),get_config_var('LDLIBRARY')))") \
+      -D PYTHON3_NUMPY_INCLUDE_DIRS=$(python3 -c "import numpy; print(numpy.get_include())") \
+      -D PYTHON3_PACKAGES_PATH=$(python3 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
       -D WITH_TBB=ON \
       ../
 
